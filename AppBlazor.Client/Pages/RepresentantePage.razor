@@ -1,0 +1,12 @@
+﻿@page "/representante"
+@inject NavigationManager navigationManager
+<h3>RepresentantePage</h3>
+<button @onclick="navegar" class="btn btn-danger">Navegar a Representante Form Page</button>
+
+@code {
+    private void navegar()
+    {
+        navigationManager.NavigateTo("/representanteForm");
+    }
+}
+
