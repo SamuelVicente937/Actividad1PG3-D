@@ -39,6 +39,21 @@ namespace AppBlazor.Test
             Assert.Contains(errores, e => e.ErrorMessage!.Contains("La venta es requerida") 
             || e.ErrorMessage!.Contains("La venta del empleado debe ser positivo"));
         }
-
+        [Fact]
+        public void ValidacionCamposCorrectos()
+        {
+            var representante = new RepresentanteFormCLS()
+            {
+                Num_Empl = 1, 
+                Nombre = "Juanito Perez",
+                Edad = 35,
+                Cargo = "Representante",
+                FechaContrato = new DateTime(2006, 1,1),
+                Cuota = 15.0,
+                Venta = 20.0
+            };
+            var errores = ValidaModelo(representante);
+            Assert.Empty(errores);
+        }
     }
 }

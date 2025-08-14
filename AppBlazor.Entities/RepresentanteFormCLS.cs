@@ -20,7 +20,7 @@ namespace AppBlazor.Entities
         [Required(ErrorMessage = "La fecha de contrato es requerida")]
         [DataType(DataType.Date, ErrorMessage = "Por favor ingresa una fecha válida")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Range(typeof(DateTime), "1980-01-01", "9999-12-31", ErrorMessage = "La fecha de contrato debe ser después de 1980")]
+        [Range(typeof(DateTime), "1960-01-01", "9999-12-31", ErrorMessage = "La fecha de contrato debe ser después de 1980")]
         public DateTime FechaContrato { get; set; }
         [Required(ErrorMessage = "La cuota es requerida")]
         [Range(1, double.MaxValue, ErrorMessage = "La cuota de empleado debe ser positivo")]
