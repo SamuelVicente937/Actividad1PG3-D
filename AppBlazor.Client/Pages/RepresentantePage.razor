@@ -1,5 +1,6 @@
 ﻿@page "/representante"
 @inject NavigationManager navigationManager
+@inject RepresentanteService representanteService
 <h3>RepresentantePage</h3>
 <button @onclick="navegar" class="btn btn-danger">Navegar a Representante Form Page</button>
 @if(lista != null && lista.Count > 0)
@@ -9,6 +10,11 @@
             <tr>
                 <th>Num_Empl</th>
                 <th>Nombre</th>
+                <th>Cargo</th>
+                <th>Edad</th>
+                <th>Fecha Contrato</th>
+                <th>Cuota</th>
+                <th>Ventas</th>
             </tr>
         </thead>
         <tbody>
@@ -17,6 +23,11 @@
                 <tr>
                     <td>@item.Num_empl</td>
                     <td>@item.Nombre</td>
+                    <td>@item.Cargo</td>
+                    <td>@item.Edad</td>
+                    <td>@item.FechaContrato</td>
+                    <td>@item.Cuota</td>
+                    <td>@item.Venta</td>
                     <td>
                         <button class="btn btn-primary" @onclick="(()=>recuperarRepresentante(item.Num_empl))">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -24,7 +35,7 @@
                                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
                             </svg>
                         </button>
-                        <button class="btn btn-danger">
+                        <button class="btn btn-danger" @onclick="(()=> eliminarRepresentante(item.Num_empl))">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                 <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
                             </svg>
@@ -44,16 +55,22 @@
     public List<RepresentanteListCLS> lista { get; set; } = new List<RepresentanteListCLS>();
     protected override Task OnInitializedAsync()
     {
-        lista.Add(new RepresentanteListCLS {Num_empl = 1, Nombre ="Juanito Perez", Edad = 25, Cargo = "Vendedor", FechaContrato = new DateTime(2006, 3,1), Cuota = 10, Venta = 15 });
-        lista.Add(new RepresentanteListCLS {Num_empl = 2, Nombre ="Juanito Perez", Edad = 25, Cargo = "Vendedor", FechaContrato = new DateTime(2006, 3,1), Cuota = 10, Venta = 15 });
-        lista.Add(new RepresentanteListCLS {Num_empl = 3, Nombre ="Juanito Perez", Edad = 25, Cargo = "Vendedor", FechaContrato = new DateTime(2006, 3,1), Cuota = 10, Venta = 15 });
-        lista.Add(new RepresentanteListCLS {Num_empl = 4, Nombre ="Juanito Perez", Edad = 25, Cargo = "Vendedor", FechaContrato = new DateTime(2006, 3,1), Cuota = 10, Venta = 15 });
-        lista.Add(new RepresentanteListCLS {Num_empl = 5, Nombre ="Juanito Perez", Edad = 25, Cargo = "Vendedor", FechaContrato = new DateTime(2006, 3,1), Cuota = 10, Venta = 15 });
+        listarRepresentante();
         return base.OnInitializedAsync();
     }
     private void recuperarRepresentante(int num_empl )
     {
         navigationManager.NavigateTo($"/representanteForm/edit/{num_empl}");
+    }
+    private void listarRepresentante()
+    {
+        lista = representanteService.listarRepresentante();
+
+    }
+    private void eliminarRepresentante(int num_empl)
+    {
+        representanteService.eliminarRepresentante(num_empl);
+        listarRepresentante();
     }
 }
 
