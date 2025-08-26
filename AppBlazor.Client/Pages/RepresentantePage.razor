@@ -1,8 +1,12 @@
 ﻿@page "/representante"
 @inject NavigationManager navigationManager
 @inject RepresentanteService representanteService
-<h3>RepresentantePage</h3>
-<button @onclick="navegar" class="btn btn-danger">Navegar a Representante Form Page</button>
+<h3 class="h2 ">RepresentantePage</h3>
+<div class="d-flex justify-content-end m-3 me-4">
+    <button @onclick="navegar" class="btn btn-danger p-2">
+        Agregar nuevo representante
+    </button>
+</div>
 @if(lista != null && lista.Count > 0)
 {
     <table class="table">
