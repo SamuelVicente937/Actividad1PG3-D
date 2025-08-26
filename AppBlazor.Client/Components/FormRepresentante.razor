@@ -1,0 +1,55 @@
+﻿@inject NavigationManager navigationManager
+<h3>FormRepresentante</h3>
+<EditForm Model="@oRepresentanteFormPage" OnValidSubmit="@guardar">
+	<DataAnnotationsValidator></DataAnnotationsValidator>
+	<div>
+		<label>Numero de Empleado</label>
+		<InputNumber class="form-control" @bind-Value="oRepresentanteFormPage.Num_Empl" />
+		<ValidationMessage For="(() => oRepresentanteFormPage.Num_Empl)" />
+	</div>
+	<div>
+		<label>Nombre de Empleado</label>
+		<InputText class="form-control" @bind-Value="oRepresentanteFormPage.Nombre" />
+		<ValidationMessage For="(() => oRepresentanteFormPage.Nombre)" />
+	</div>
+	<div>
+		<label>Edad de Empleado</label>
+		<InputNumber class="form-control" @bind-Value="oRepresentanteFormPage.Edad" />
+		<ValidationMessage For="(() => oRepresentanteFormPage.Edad)" />
+	</div>
+	<div>
+		<label>Cargo de Empleado</label>
+		<InputText class="form-control" @bind-Value="oRepresentanteFormPage.Cargo" />
+		<ValidationMessage For="(() => oRepresentanteFormPage.Cargo)" />
+	</div>
+	<div>
+		<label>Fecha de Contrato de Empleado</label>
+		<InputDate class="form-control" @bind-Value="oRepresentanteFormPage.FechaContrato" />
+		<ValidationMessage For="(() => oRepresentanteFormPage.FechaContrato)" />
+	</div>
+	<div>
+		<label>Cuota de Empleado</label>
+		<InputNumber class="form-control" @bind-Value="oRepresentanteFormPage.Cuota" />
+		<ValidationMessage For="(() => oRepresentanteFormPage.Cuota)" />
+	</div>
+	<div>
+		<label>Venta de Empleado</label>
+		<InputNumber class="form-control" @bind-Value="oRepresentanteFormPage.Venta" />
+		<ValidationMessage For="(() => oRepresentanteFormPage.Venta)" />
+	</div>
+	<div class="mt-3">
+		<button type="submit" class="btn btn-success">Guardar</button>
+		<button @onclick=regresar class="btn btn-danger">Regresar</button>
+	</div>
+</EditForm>
+@code {
+	public RepresentanteFormCLS oRepresentanteFormPage { get; set; } = new RepresentanteFormCLS();
+	private void guardar()
+	{
+		Console.WriteLine("Guardando");
+	}
+	private void regresar()
+	{
+		navigationManager.NavigateTo("/representante");
+	}
+}
